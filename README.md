@@ -1,181 +1,302 @@
-<div align="center">
+📧 AI Email Analyzer
+🤖 Analyze, Score & Reply to Emails using Local AI (Ollama + Streamlit)
 
-![AI Email Analyzer Banner](assets/email_analyzer_banner.svg)
 
-# 📧 AI Email Analyzer
 
-### Summarize. Detect Risk. Draft Replies. — 100% Local, 100% Private.
+📌 Project Overview
+AI Email Analyzer is an AI-powered web application developed using Python, Streamlit, and Ollama.
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-000000?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.com/)
-[![License](https://img.shields.io/badge/License-MIT-22C55E?style=for-the-badge)](#-license)
-[![Privacy](https://img.shields.io/badge/Privacy-First-2563EB?style=for-the-badge)](#-features)
+The application allows users to upload .eml files or paste raw email text, automatically extract headers, body, links and attachments, and use a Local Large Language Model (LLM) to understand, score, and respond to the email.
 
-**AI Email Analyzer** reads your emails and gives you instant, actionable insight — summarized intent, phishing/spam risk scoring, drafted replies, and thread summaries — without ever sending a single byte to the cloud.
+Unlike cloud-based AI tools, this project runs completely offline using Ollama, ensuring privacy while providing intelligent email analysis — ideal for handling sensitive correspondence securely.
 
-[Features](#-features) • [Demo](#-demo) • [Quick Start](#-quick-start) • [Project Structure](#-project-structure) • [FAQ](#-faq)
+✨ Features
+Feature	Description
+📨 Multiple Input Methods	Upload .eml files or paste raw email text
+📖 Header & Body Extraction	Automatically parses From, To, Subject, Date, body, links and attachments
+📊 Email Statistics	Shows word count, link count and attachment count
+🤖 AI Smart Summary	Generates intent, tone, urgency level and action items
+🚩 Phishing & Spam Risk Check	Rule-based heuristic scan + AI second opinion, scored 0-100
+✍️ Reply Drafting	Generates a ready-to-send reply in your chosen tone
+🔑 Keyword Extraction	Finds important keywords from the email body
+🧵 Thread Summarization	Summarizes a full back-and-forth conversation into one overview
+📥 Download Report	Download the AI-generated analysis or reply draft
+🌙 Modern UI	Beautiful dark-themed Streamlit interface
+🔒 Local AI	Runs completely offline using Ollama
+🖥 Application Preview
+🏠 Home Page
 
-</div>
+📂 Upload / Paste Email
 
----
+🚩 Phishing Risk Check
 
-## 🎬 Demo
+🤖 AI Smart Summary
 
-<div align="center">
+✍️ Reply Draft
 
-| Single Email Analysis | Phishing Risk Detection | Reply Drafting |
-|:---:|:---:|:---:|
-| ![Summary screenshot](screenshots/summary.png) | ![Risk screenshot](screenshots/risk_check.png) | ![Reply screenshot](screenshots/reply_draft.png) |
+🧵 Thread Summary
 
-</div>
+🚀 How It Works
+Upload .eml / Paste Email Text
+       │
+       ▼
+Parse Headers, Body, Links, Attachments
+       │
+       ▼
+Run Heuristic Risk Scan
+       │
+       ▼
+Send Prompt to Ollama
+       │
+       ▼
+AI Analysis
+       │
+       ▼
+Display Results
+       │
+       ▼
+Draft Reply / Summarize Thread
+🧠 AI Capabilities
+The AI model can perform:
 
-> 📌 *Drop your own screenshots into the `screenshots/` folder using these exact filenames and they'll render automatically above.*
-
----
-
-## ✨ Features
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### 📝 Smart Summarization
-Get the intent, tone, and urgency of any email at a glance, plus extracted action items and deadlines — ending in a clear **reply now / later / archive** verdict.
-
-### 🚩 Phishing & Spam Detection
-An instant rule-based scanner flags urgency language, sensitive-info requests, suspicious domains, and sender/reply-to mismatches — scored 0–100 — backed up by an optional AI second opinion.
-
-### ✍️ Reply Drafting
-Generate a ready-to-send reply in **Professional, Friendly, Apologetic, Firm, or Brief** tone, with optional custom instructions like *"decline politely"* or *"ask for an extension."*
-
-</td>
-<td width="50%" valign="top">
-
-### 🔑 Keyword Extraction
-Instantly surface the most relevant terms from any email body.
-
-### 🧵 Thread Summarization
-Paste in a full back-and-forth conversation and get one summary covering what happened, who wants what, and what's next.
-
-### 🔒 Fully Local & Private
-Powered entirely by [Ollama](https://ollama.com) running on your own machine. No API keys. No cloud calls. Nothing leaves your computer — ideal for sensitive correspondence.
-
-</td>
-</tr>
-</table>
-
----
-
-## 🚀 Quick Start
-
-```bash
-# 1. Move into the project folder
-cd email-analyzer
-
-# 2. (Recommended) create a virtual environment
-python3 -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Start Ollama (separate terminal, keep it running)
-ollama serve
-
-# 5. Pull a model (only needed once)
-ollama pull llama3.2:1b
-
-# 6. Launch the app
-streamlit run app.py
-```
-
-The app opens automatically at **http://localhost:8501** 🎉
-
----
-
-## 🖥️ How It Works
-
-```
-┌─────────────────┐     ┌──────────────────┐     ┌────────────────────┐
-│  Upload .eml /   │ ──▶ │  Parse headers,   │ ──▶ │  Heuristic risk     │
-│  paste email     │     │  body, links,     │     │  scan (instant)     │
-│  text            │     │  attachments      │     │                     │
-└─────────────────┘     └──────────────────┘     └─────────┬──────────┘
-                                                              │
-                          ┌───────────────────────────────────┘
-                          ▼
-                ┌──────────────────────┐
-                │   Local Ollama LLM    │ ──▶  Summary · Reply Draft
-                │   (your machine)      │       Keywords · Thread Recap
-                └──────────────────────┘
-```
-
----
-
-## 📁 Project Structure
-
-```
-email-analyzer/
-├── app.py              # Streamlit UI
-├── analyzer.py          # Ollama connection, retries, caching
-├── email_reader.py      # .eml / pasted-text parsing
-├── risk_scoring.py       # Phishing/spam heuristic scorer
-├── prompt.py             # Prompt templates
+📄 Email Summarization
+🎯 Intent & Tone Detection
+⏰ Urgency Level Assessment
+✅ Action Item Extraction
+📅 Deadline Detection
+🛡 Phishing / Spam Risk Assessment
+🔑 Keyword Generation
+✍️ Reply Drafting (multiple tones)
+🧵 Thread Summarization
+📂 Project Structure
+AI-Email-Analyzer/
+│
+├── assets/
+├── screenshots/
+│   ├── homepage.png
+│   ├── upload.png
+│   ├── risk_check.png
+│   ├── summary.png
+│   └── reply_draft.png
+│
+├── analyzer.py
+├── app.py
+├── email_reader.py
+├── risk_scoring.py
+├── prompt.py
 ├── requirements.txt
 ├── README.md
-├── .gitignore
-├── assets/               # banner / logo images
-└── screenshots/          # app screenshots
-```
+└── .gitignore
+⚙️ Installation
+1️⃣ Clone the Repository
+git clone https://github.com/EmaanAftab/AI-Email-Analyzer.git
+Move into the project folder:
 
----
+cd AI-Email-Analyzer
+2️⃣ Create a Virtual Environment
+Windows
+python -m venv .venv
+Activate it:
 
-## 🛠️ Built With
+.venv\Scripts\activate
+Linux / macOS
+python3 -m venv .venv
 
-| Tool | Purpose |
-|---|---|
-| [Streamlit](https://streamlit.io) | Web UI framework |
-| [Ollama](https://ollama.com) | Local LLM runtime |
-| Python `email` module | `.eml` parsing |
-| `requests` | Ollama API communication |
+source .venv/bin/activate
+3️⃣ Install Required Packages
+pip install -r requirements.txt
+🦙 Install Ollama
+This project uses Ollama to run a local Large Language Model (LLM).
 
----
+Download Ollama from:
 
-## ❓ FAQ
+👉 https://ollama.com/download
 
-<details>
-<summary><b>Does this send my emails anywhere?</b></summary>
-<br>
-No. Every AI call goes to your local Ollama instance at <code>localhost:11434</code>. Nothing is uploaded to any external server.
-</details>
+After installation, verify it is installed:
 
-<details>
-<summary><b>Can it read .msg (Outlook) files?</b></summary>
-<br>
-Not directly — Outlook's binary <code>.msg</code> format isn't supported by Python's standard library. Export the email as <code>.eml</code> first (most clients support "Download message" or "Show original").
-</details>
+ollama --version
+📥 Download an AI Model
+Download a lightweight model:
 
-<details>
-<summary><b>How accurate is the phishing detector?</b></summary>
-<br>
-The heuristic score is a helpful first-pass signal, not a guarantee. Always verify suspicious senders through an official channel rather than relying solely on this tool.
-</details>
+ollama pull llama3.2:1b
+You can also use other supported models such as:
 
-<details>
-<summary><b>What model should I use?</b></summary>
-<br>
-<code>llama3.2:1b</code> is fast and lightweight for testing. For better quality summaries/replies, try a larger model like <code>llama3.1:8b</code> if your hardware supports it.
-</details>
+llama3.2
+llama3.1
+mistral
+gemma
+phi3
+▶️ Start Ollama
+Before running the application, start the Ollama server:
 
----
+ollama serve
+If everything is working correctly, the application sidebar will display:
 
-## 📄 License
+🟢 Ollama Online
+🚀 Run the Application
+Run the Streamlit app:
 
-This project is open for personal and educational use under the MIT License. Feel free to fork, modify, and build on it.
+python -m streamlit run app.py
+The application will open automatically in your browser.
 
-<div align="center">
+Default URL:
 
-Made with ☕ and a healthy distrust of phishing emails.
+http://localhost:8501
+📋 Supported Input Types
+Input Type	Supported
+.eml File Upload	✅
+Pasted Raw Email Text	✅
+.msg (Outlook)	❌ (export as .eml first)
+💡 Example Workflow
+Step 1
+Upload an .eml file or paste email text.
 
-</div>
+↓
+
+Step 2
+The application extracts headers, body, links and attachments automatically.
+
+↓
+
+Step 3
+View the instant phishing/spam risk score and flagged reasons.
+
+↓
+
+Step 4
+Click:
+
+🚀 Analyze Email
+↓
+
+Step 5
+Receive:
+
+📄 Summary
+🎯 Intent
+😊 Tone
+⏰ Urgency Level
+✅ Action Items
+📅 Deadlines
+↓
+
+Step 6
+Click:
+
+✍️ Generate Reply Draft
+↓
+
+Step 7
+Paste multiple thread messages to get a combined thread summary.
+
+↓
+
+Step 8
+Download the AI-generated analysis or reply draft.
+
+💻 Technologies Used
+Technology	Purpose
+Python	Backend Programming
+Streamlit	Web Interface
+Ollama	Local AI Model
+Requests	API Communication
+email (stdlib)	.eml Parsing
+re (stdlib)	Heuristic Risk Scoring
+Markdown	Report Formatting
+📦 Python Modules
+This project uses:
+
+streamlit
+requests
+All dependencies are listed in requirements.txt.
+
+🔥 Key Highlights
+✅ Runs completely offline
+
+✅ No cloud API required
+
+✅ Privacy-friendly
+
+✅ Modern user interface
+
+✅ Supports .eml files and pasted text
+
+✅ Local AI using Ollama
+
+✅ Instant phishing/spam risk scoring
+
+✅ AI-generated reply drafting
+
+✅ Multi-message thread summarization
+
+🔮 Future Improvements
+The following features can be added in future versions of the project:
+
+🌍 Multi-language email analysis
+📎 Attachment content scanning (PDF/DOCX inside emails)
+🖼 OCR support for image-based emails
+📊 AI-powered sender/risk trend dashboard
+📥 Direct inbox connection (IMAP/Gmail API)
+💾 Persistent chat/thread history
+☁ Cloud deployment (Streamlit Cloud / Hugging Face / Render)
+👥 User authentication and profiles
+📱 Mobile-friendly responsive interface
+🔍 Bulk email batch analysis
+🤝 Contributing
+Contributions are always welcome!
+
+If you'd like to improve this project:
+
+Fork this repository.
+Create a new feature branch.
+Commit your changes.
+Push your branch.
+Open a Pull Request.
+🐞 Report Issues
+Found a bug or have a suggestion?
+
+Please open an issue on GitHub.
+
+Your feedback helps improve this project.
+
+📄 License
+This project is licensed under the MIT License.
+
+Feel free to use, modify, and distribute this project for educational and personal purposes.
+
+See the LICENSE file for more details.
+
+👩‍💻 Author
+Emaan Aftab
+BS Artificial Intelligence Student
+
+Pak-Austria Fachhochschule Institute of Applied Sciences and Technology (PAF-IAST)
+
+📍 Abbottabad, Pakistan
+
+Connect with me
+🐙 GitHub
+
+https://github.com/EmaanAftab
+
+💼 LinkedIn
+
+https://www.linkedin.com/in/emaan-aftab-77bb88302/
+
+💖 Support This Project
+If you found this project helpful,
+
+please consider giving it a ⭐ on GitHub.
+
+It motivates me to build more AI and Machine Learning projects.
+
+🙏 Acknowledgements
+Special thanks to the open-source community and the developers of:
+
+Python
+Streamlit
+Ollama
+⭐ If you like this project, don't forget to Star the Repository! ⭐
+Made with ❤️ using Python, Streamlit and Ollama.
+
+© 2026 Emaan Aftab. All Rights Reserved.
